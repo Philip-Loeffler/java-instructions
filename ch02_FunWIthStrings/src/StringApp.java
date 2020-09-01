@@ -47,6 +47,19 @@ public class StringApp {
 			System.out.println("number is greater than ten!");
 		}
 		
+		// while loop
+		System.out.println("do you want to continue (y/n)");
+		String choice = sc.next();
+		//checks if your y is upper and lower case
+		while (choice.equalsIgnoreCase("y")) {
+			System.out.println("user wants to continue!!!!!");
+			System.out.println("continue? (y/n)");
+			choice = sc.next();
+		}
+		System.out.println("bye");
+	}
+		
+		
 		
 		
 		
