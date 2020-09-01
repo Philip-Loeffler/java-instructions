@@ -5,5 +5,4 @@ public class FirstNewProjectApp {
 		System.out.println("Hello");
 		System.out.println("There");
 	}
-
 }
