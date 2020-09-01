@@ -41,6 +41,12 @@ public class StringApp {
 		double d = sc.nextDouble();
 		System.out.println("you entered" + " " + number);
 		
+		// use relational operators
+		//if this condition is true, do what is inside these curly braces
+		if (number > 10) {
+			System.out.println("number is greater than ten!");
+		}
+		
 		
 		
 		
