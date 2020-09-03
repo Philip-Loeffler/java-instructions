@@ -10,6 +10,8 @@ public class GradeConverter {
 		String gradeD = "D";
 		String gradeF = "F";
 
+		//could also do this String LetterGrade = ""
+		//then define letter grade as lettergrade = "A" after one of the ifs
 
 		System.out.println("Welcome to the letter grade converter");
         String choice = "y";

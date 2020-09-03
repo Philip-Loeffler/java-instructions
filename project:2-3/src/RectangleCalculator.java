@@ -19,4 +19,5 @@ public class RectangleCalculator {
 		System.out.println("would you like to continue (y\n)");
 		choice = sc.nextLine();
 	}
+	
 }
