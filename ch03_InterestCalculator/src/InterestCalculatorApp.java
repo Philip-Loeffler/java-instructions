@@ -9,7 +9,8 @@ public class InterestCalculatorApp {
 		Scanner sc = new Scanner(System.in);
 		NumberFormat currency = NumberFormat.getCurrencyInstance();
 		NumberFormat percentage = NumberFormat.getPercentInstance();
-		percentage.setMaximumFractionDigits(3);
+		percentage.setMinimumFractionDigits(3);
+
 		System.out.println("Welcome to the Interest Calculator");
 		System.out.println("Enter in loan amount");
 
