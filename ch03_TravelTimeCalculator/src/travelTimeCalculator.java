@@ -13,8 +13,7 @@ public class travelTimeCalculator {
 		double mph = sc.nextDouble();
 
 		int hours = (int) (miles / mph);
-		double milesRemaining = hours % mph;
-		int minutes = (int) ((milesRemaining / mph * MINUTES_PER_HOUR) % MINUTES_PER_HOUR);
+		int minutes = (int) ((miles / mph * MINUTES_PER_HOUR) % MINUTES_PER_HOUR);
 
 		System.out.println("Estimated Travel Time");
 
