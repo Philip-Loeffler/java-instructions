@@ -13,8 +13,10 @@ public class CommonDivisorCalculatorApp {
 		int num2 = sc.nextInt();
 
 		if (num1 < num2)
-			for (int i = 0; i == num2; i--) {
-
+			for (int i = 0; i == num1 && i == num2; i--) {
+				
+				//come back and check if logic
+				if (num1 < num2)
 			}
 		System.out.print("greatest common divsor");
 

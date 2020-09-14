@@ -24,7 +24,5 @@ public class diceRollerApp {
 		System.out.println("die 2:" + dice2);
 		System.out.println("total:" + total);
 		;
-
 	}
-
 }
