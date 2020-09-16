@@ -13,22 +13,31 @@ public class guessingGameApp {
 
 		System.out.println("I'm thinking of a number between 1 and 100");
 		System.out.println("try to guess it ");
-		int guess = sc.nextInt();
-		int numberOfGuesses = guess;
-		String choice = "y";
+		int numberOfGuesses = 1;
 
+		String choice = "y";
 		while (choice.equalsIgnoreCase("y")) {
+			System.out.println("try to guess it ");
+			int guess = sc.nextInt();
+			numberOfGuesses++;
 			if (numberOfGuesses <= 3) {
 				numberComparer(randomNumber, guess, numberOfGuesses);
 			} else if ((numberOfGuesses > 3) && (numberOfGuesses <= 7)) {
 				numberComparer(randomNumber, guess, numberOfGuesses);
 			} else if (numberOfGuesses > 7) {
 				numberComparer(randomNumber, guess, numberOfGuesses);
+			} else {
+				System.out.println("letter grade:");
+				System.out.println(choice);
+
 			}
 			System.out.print("Continue? (y/n): ");
 			choice = sc.next();
+			System.out.println();
 
 		}
+		System.out.println("bye");
+
 	}
 
 	public static void goodJobMessage() {
