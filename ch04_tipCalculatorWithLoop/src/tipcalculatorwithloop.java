@@ -22,9 +22,9 @@ public class tipcalculatorwithloop {
 				BigDecimal tipAmount = cost.multiply(tipPercent);
 				BigDecimal totalCost = cost.add(tipAmount);
 
-				System.out.print(percent.format(tipPercent));
-				System.out.print("tip amount" + currency.format(tipAmount));
-				System.out.print("total amount" + currency.format(totalCost));
+				System.out.println(percent.format(tipPercent));
+				System.out.println("tip amount" + currency.format(tipAmount));
+				System.out.println("total amount" + currency.format(totalCost));
 
 				// increment to next tip amount
 				tipPercent = tipPercent.add(tipIncrement);
