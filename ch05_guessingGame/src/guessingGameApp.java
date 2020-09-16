@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class guessingGameApp {
@@ -7,23 +8,26 @@ public class guessingGameApp {
 		int limit = 100;
 		double rand1 = Math.random() * limit;
 		int randomNumber = (int) rand1;
-		System.out.print("Welcome to the guess the number game");
-		System.out.print("+++++++++++++++++++++++++++++++++++++");
+		System.out.println("Welcome to the guess the number game");
+		System.out.println("+++++++++++++++++++++++++++++++++++++");
 
-		System.out.print("I'm thinking of a number between 1 and 100");
-		System.out.print("try to guess it ");
+		System.out.println("I'm thinking of a number between 1 and 100");
+		System.out.println("try to guess it ");
 		int guess = sc.nextInt();
 		int numberOfGuesses = guess;
+		String choice = "y";
 
-		if (numberOfGuesses <= 3) {
-			numberComparer(randomNumber, guess, numberOfGuesses);
-			goodJobMessage();
-		} else if ((numberOfGuesses > 3) && (numberOfGuesses <= 7)) {
-			numberComparer(randomNumber, guess, numberOfGuesses);
-			notToBadMessage();
-		} else {
-			numberComparer(randomNumber, guess, numberOfGuesses);
-			lessonsMessage();
+		while (choice.equalsIgnoreCase("y")) {
+			if (numberOfGuesses <= 3) {
+				numberComparer(randomNumber, guess, numberOfGuesses);
+			} else if ((numberOfGuesses > 3) && (numberOfGuesses <= 7)) {
+				numberComparer(randomNumber, guess, numberOfGuesses);
+			} else if (numberOfGuesses > 7) {
+				numberComparer(randomNumber, guess, numberOfGuesses);
+			}
+			System.out.print("Continue? (y/n): ");
+			choice = sc.next();
+
 		}
 	}
 
@@ -44,7 +48,7 @@ public class guessingGameApp {
 			System.out.print("Way to high! guess Again");
 		} else if (guessedNumber < randomNumber) {
 			System.out.print("too low! guess again");
-		} else if (guessedNumber < randomNumber) {
+		} else if (guessedNumber == randomNumber) {
 			System.out.print("not bad! you got it in" + numberOfGuesses);
 		}
 		return numberOfGuesses;
