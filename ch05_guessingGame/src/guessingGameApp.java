@@ -12,7 +12,6 @@ public class guessingGameApp {
 		System.out.println("+++++++++++++++++++++++++++++++++++++");
 
 		System.out.println("I'm thinking of a number between 1 and 100");
-		System.out.println("try to guess it ");
 		int numberOfGuesses = 1;
 
 		String choice = "y";
@@ -54,11 +53,11 @@ public class guessingGameApp {
 
 	public static int numberComparer(int randomNumber, int guessedNumber, int numberOfGuesses) {
 		if (guessedNumber > randomNumber) {
-			System.out.print("Way to high! guess Again");
+			System.out.print("Way to high! guess again" + " ");
 		} else if (guessedNumber < randomNumber) {
-			System.out.print("too low! guess again");
+			System.out.print("too low! guess again" + " ");
 		} else if (guessedNumber == randomNumber) {
-			System.out.print("not bad! you got it in" + numberOfGuesses);
+			System.out.print("not bad! you got it in" + " " + numberOfGuesses);
 		}
 		return numberOfGuesses;
 	}
