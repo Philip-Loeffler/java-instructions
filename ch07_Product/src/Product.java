@@ -7,6 +7,9 @@ public class Product {
 	private String description;
 	private double price;
 
+	// static variables
+	private static int instanceCount = 0;
+
 	// constructor that you dont pass arguements into when you create the instance
 	// object
 	public Product() {
