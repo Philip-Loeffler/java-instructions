@@ -1,16 +1,24 @@
 
-public class contactList {
+public class ContactList {
 
 	private String firstName;
 	private String lastName;
 	private String email;
 	private int phoneNumber;
 
-	public contactList() {
+	public ContactList() {
 		firstName = "";
 		lastName = "";
 		email = "";
 		phoneNumber = 0;
+	}
+
+	public ContactList(String firstName, String lastName, String email, int phoneNumber) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+
 	}
 
 	public void setfirstName(String firstName) {
