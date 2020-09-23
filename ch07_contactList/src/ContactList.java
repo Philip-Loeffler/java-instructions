@@ -4,16 +4,20 @@ public class ContactList {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private int phoneNumber;
+	private String phoneNumber;
 
 	public ContactList() {
 		firstName = "";
 		lastName = "";
 		email = "";
-		phoneNumber = 0;
+		phoneNumber = "";
 	}
 
-	public ContactList(String firstName, String lastName, String email, int phoneNumber) {
+// use this way, to just pass in the inputs to not need to use the setters 
+//	public ContactList("","","","") {
+//		this();
+//	}
+	public ContactList(String firstName, String lastName, String email, String phoneNumber) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -45,11 +49,11 @@ public class ContactList {
 		return email;
 	}
 
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public double getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
