@@ -7,6 +7,7 @@ public class ProductDB {
 		// to return the correct product data
 
 		Product p = null;
+
 		if (productCode.equalsIgnoreCase("java") || productCode.equalsIgnoreCase("jsp")
 				|| productCode.equalsIgnoreCase("mysql")) {
 			Book b = new Book();
