@@ -3,26 +3,31 @@ import java.util.Scanner;
 public class BattingStatisticApp {
 
 	public static void main(String[] args) {
+		double sluggingAverage = 0;
+		double battingAverage = 0;
+
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Please enter number");
+		System.out.println("Please enter number between 1-30");
 		int num = sc.nextInt();
-		int resultsAtBatNum[] = new int[num];
-		int atBats = 0;
-//		for (int i = 0; i < num; i++) {
-//			System.out.println("Enter results at bat");
-//			int resultsAtBat = sc.nextInt();
-//			resultsAtBatNum = new int[resultsAtBat];
+//		if (num >= 30) {
+//			System.out.println("to high! try again");
 //		}
 
-		for (int i = 0; i < resultsAtBatNum.length; i++) {
-			System.out.println("Enter results at bat");
-			resultsAtBatNum[i] = sc.nextInt();
-			atBats = atBats + resultsAtBatNum[i];
-		}
+		int atBats[] = new int[num];
+		int basesEarned = 0;
+		System.out.println("0 = out, 1 = single, 2 = double, 3 = triple, 4 = homerun");
 
-		System.out.println(atBats);
-		System.out.println("Batting Average");
-		System.out.println("Slugging Average");
+		// loops over number input and adds all at bat inputs
+		for (int i = 0; i < atBats.length; i++) {
+			System.out.print("Enter results at bat ");
+			atBats[i] = sc.nextInt();
+			basesEarned = basesEarned + atBats[i];
+		}
+		sluggingAverage = (double) basesEarned / num;
+		battingAverage = (double) num / basesEarned;
+		System.out.println(basesEarned);
+		System.out.println("Batting Average" + battingAverage);
+		System.out.println("Slugging Average" + sluggingAverage);
 
 	}
 }
