@@ -30,5 +30,8 @@ public class FileCleanerApp {
 			line = in.readLine();
 		}
 		in.close();
+
 	}
 }
+
+// create stream to send file to a new file
