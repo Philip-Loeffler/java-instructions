@@ -19,7 +19,7 @@ public final class CustomerTextFile implements DAO<Customer> {
 
 	private final String FIELD_SEP = "\t";
 
-	public CustomerTextFile() {
+	public CustomerTextFile() throws IOException {
 		// initialize variables,
 		customersPath = Paths.get("customers.txt");
 		customersFile = customersPath.toFile();
@@ -30,7 +30,7 @@ public final class CustomerTextFile implements DAO<Customer> {
 	}
 
 	@Override
-	public List<Customer> getAll() {
+	public List<Customer> getAll() throws IOException {
 		// if the customers file has already been read, don't read it again
 		if (customers != null) {
 			return customers;
@@ -66,13 +66,13 @@ public final class CustomerTextFile implements DAO<Customer> {
 	}
 
 	@Override
-	public Customer get(String email) throws IOException, noSuchCustomerException {
+	public Customer get(String email) throws IOException {
 		for (Customer c : customers) {
 			if (c.getEmail().equals(email)) {
 				return c;
 			}
 		}
-		throw new noSuchCustomerException("customer with email " + email + "not found");
+		return null;
 	}
 
 	@Override
@@ -82,13 +82,13 @@ public final class CustomerTextFile implements DAO<Customer> {
 	}
 
 	@Override
-	public boolean delete(Customer c) {
+	public boolean delete(Customer c) throws IOException {
 		customers.remove(c);
 		return this.saveAll();
 	}
 
 	@Override
-	public boolean update(Customer newCustomer) {
+	public boolean update(Customer newCustomer) throws IOException {
 		// get the old customer and remove it
 		Customer oldCustomer = this.get(newCustomer.getEmail());
 		int i = customers.indexOf(oldCustomer);
@@ -100,7 +100,7 @@ public final class CustomerTextFile implements DAO<Customer> {
 		return this.saveAll();
 	}
 
-	private boolean saveAll() {
+	private boolean saveAll() throws IOException {
 		// save the Customer objects in the array list to the file
 		try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(customersFile)))) {
 			for (Customer c : customers) {
