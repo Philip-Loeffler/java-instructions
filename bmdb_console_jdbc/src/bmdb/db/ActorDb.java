@@ -38,16 +38,10 @@ public class ActorDb {
 			// this will go through every row and eventually return false
 			while (actors.next()) {
 				// the string is the column name from the db
-				long id = actors.getLong("ID");
-				String firstName = actors.getString("FirstName");
-				String lastName = actors.getString("LastName");
-				String gender = actors.getString("Gender");
-				String birthDate = actors.getString("BirthDate");
-
-				// fully populated actor object from the db.
-				Actor actor = new Actor(id, firstName, lastName, gender, LocalDate.parse(birthDate));
-
+				Actor actor = getActorFromResultSet(actors);
 				actorList.add(actor);
+				// fully populated actor object from the db.
+
 			}
 		} catch (SQLException e) {
 			System.err.print("caught exception" + e);
@@ -61,6 +55,43 @@ public class ActorDb {
 
 		return actorList;
 	}
+//	public List<Actor> getAll() {
+//		List<Actor> actorList = new ArrayList<>();
+//
+//		try (Connection con = getConnection();
+//				// statement runs across that connection
+//				Statement stmt = con.createStatement();
+//				// results set is what we use to store the query
+//				ResultSet actors = stmt.executeQuery("SELECT * FROM Actor");)
+//
+//		{
+//
+//			// this will go through every row and eventually return false
+//			while (actors.next()) {
+//				// the string is the column name from the db
+//				long id = actors.getLong("ID");
+//				String firstName = actors.getString("FirstName");
+//				String lastName = actors.getString("LastName");
+//				String gender = actors.getString("Gender");
+//				String birthDate = actors.getString("BirthDate");
+//
+//				// fully populated actor object from the db.
+//				Actor actor = new Actor(id, firstName, lastName, gender, LocalDate.parse(birthDate));
+//
+//				actorList.add(actor);
+//			}
+//		} catch (SQLException e) {
+//			System.err.print("caught exception" + e);
+//			return null;
+//		}
+//		// close everything that has been opened
+//		// had closes before we used try with resources
+////		actors.close();
+////		stmt.close();
+////		con.close();
+//
+//		return actorList;
+//	}
 
 	public Actor get(String lastName) {
 		String actorSelect = "SELECT * FROM ACTOR WHERE LastName = '" + lastName + " '";
@@ -89,5 +120,21 @@ public class ActorDb {
 			System.err.print("caught exception" + e);
 			return null;
 		}
+	}
+
+	public Actor getActorFromResultSet(ResultSet rs) throws SQLException {
+		List<Actor> actorList = new ArrayList<>();
+
+		// the string is the column name from the db
+		long id = rs.getLong("ID");
+		String firstName = rs.getString("FirstName");
+		String lastName = rs.getString("LastName");
+		String gender = rs.getString("Gender");
+		String birthDate = rs.getString("BirthDate");
+
+		// fully populated actor object from the db.
+		Actor actor1 = new Actor(id, firstName, lastName, gender, LocalDate.parse(birthDate));
+		return actor1;
+
 	}
 }
