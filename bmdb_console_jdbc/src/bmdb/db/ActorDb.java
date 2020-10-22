@@ -2,6 +2,7 @@ package bmdb.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -93,26 +94,22 @@ public class ActorDb {
 //		return actorList;
 //	}
 
-	public Actor get(String lastName) {
-		String actorSelect = "SELECT * FROM ACTOR WHERE LastName = '" + lastName + " '";
+	public Actor getActorByLastName(String lastName) {
+		String actorSelect = "SELECT * FROM ACTOR WHERE LastName = ?";
 		try (Connection con = getConnection();
 				// statement runs across that connection
-				Statement stmt = con.createStatement();
-				// results set is what we use to store the query
-				ResultSet actors = stmt.executeQuery(actorSelect);) {
-
+				PreparedStatement ps = con.prepareStatement(actorSelect);) // results set is what we use to store the
+																			// query
+		{
+			ps.setString(1, lastName);
+			ResultSet actors = ps.executeQuery();
 			// will execute if there is one row
 			if (actors.next()) {
-				long id = actors.getLong("ID");
-				String firstName = actors.getString("FirstName");
-				String lName = actors.getString("LastName");
-				String gender = actors.getString("Gender");
-				String birthDate = actors.getString("BirthDate");
-
-				// fully populated actor object from the db.
-				Actor actor = new Actor(id, firstName, lName, gender, LocalDate.parse(birthDate));
+				Actor actor = getActorFromResultSet(actors);
+				actors.close();
 				return actor;
 			} else {
+				actors.close();
 				return null;
 			}
 
@@ -122,8 +119,82 @@ public class ActorDb {
 		}
 	}
 
-	public Actor getActorFromResultSet(ResultSet rs) throws SQLException {
-		List<Actor> actorList = new ArrayList<>();
+	public Actor get(long id) {
+		String actorSelect = "SELECT * FROM ACTOR WHERE ID = ?";
+		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(actorSelect);) {
+			ps.setLong(1, id);
+			ResultSet actors = ps.executeQuery();
+
+			// will execute if there is one row
+			if (actors.next()) {
+				Actor actor = getActorFromResultSet(actors);
+				actors.close();
+				return actor;
+			} else {
+				actors.close();
+				return null;
+			}
+
+		} catch (SQLException e) {
+			System.err.print("caught exception" + e);
+			return null;
+		}
+	}
+
+	public boolean add(Actor actor) {
+		String actorInsert = "INSERT INTO actor(FirstName, LastName, Gender, BirthDate) VALUES (?, ?, ?, ?)";
+
+		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(actorInsert)) {
+			ps.setString(1, actor.getFirstName());
+			ps.setString(2, actor.getLastName());
+			ps.setString(3, actor.getGender());
+			ps.setString(4, actor.getBirthDate().toString());
+
+			ps.executeUpdate();
+
+			return true;
+
+		} catch (SQLException e) {
+			System.err.print("caught exception" + e);
+			return false;
+		}
+	}
+
+	public boolean update(Actor actor) {
+		String actorUpdate = "UPDATE actor SET FirstName = ?, LastName = ?, Gender = ?, BirthDate = ? WHERE ID = ?";
+
+		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(actorUpdate)) {
+			ps.setString(1, actor.getFirstName());
+			ps.setString(2, actor.getLastName());
+			ps.setString(3, actor.getGender());
+			ps.setString(4, actor.getBirthDate().toString());
+			ps.setLong(5, actor.getId());
+
+			ps.executeUpdate();
+
+			return true;
+
+		} catch (SQLException e) {
+			System.err.print("caught exception" + e);
+			return false;
+		}
+	}
+
+	public boolean delete(long id) {
+		String actorDelete = "DELETE FROM actor WHERE ID = ?";
+		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(actorDelete)) {
+			ps.setLong(1, id);
+			ps.executeUpdate();
+
+			return true;
+
+		} catch (SQLException e) {
+			System.err.print("caught exception" + e);
+			return false;
+		}
+	}
+
+	private Actor getActorFromResultSet(ResultSet rs) throws SQLException {
 
 		// the string is the column name from the db
 		long id = rs.getLong("ID");
@@ -133,8 +204,8 @@ public class ActorDb {
 		String birthDate = rs.getString("BirthDate");
 
 		// fully populated actor object from the db.
-		Actor actor1 = new Actor(id, firstName, lastName, gender, LocalDate.parse(birthDate));
-		return actor1;
+		Actor actor = new Actor(id, firstName, lastName, gender, LocalDate.parse(birthDate));
+		return actor;
 
 	}
 }
