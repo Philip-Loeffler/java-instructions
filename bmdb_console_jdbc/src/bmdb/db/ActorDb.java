@@ -143,7 +143,6 @@ public class ActorDb {
 
 	public boolean add(Actor actor) {
 		String actorInsert = "INSERT INTO actor(FirstName, LastName, Gender, BirthDate) VALUES (?, ?, ?, ?)";
-
 		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(actorInsert)) {
 			ps.setString(1, actor.getFirstName());
 			ps.setString(2, actor.getLastName());

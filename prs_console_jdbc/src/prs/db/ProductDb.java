@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prs.business.Product;
+import prs.excption.PrsDataException;
 
 public class ProductDb {
 
@@ -53,8 +54,7 @@ public class ProductDb {
 			return products;
 
 		} catch (SQLException e) {
-			System.err.print("Error retrieving products" + e);
-			return null;
+			throw new PrsDataException("Error retrieving produts. Msg" + e.getMessage());
 		}
 
 	}
@@ -94,7 +94,7 @@ public class ProductDb {
 	}
 
 	public boolean add(Product product) {
-		String productInsert = "INSERT INTO product(VendorId, PartNumber, Name, Price, Unit, PhotoPath) VALUES (?, ?, ?, ?, ?, ?)";
+		String productInsert = "INSERT INTO product(VendorId, PartNumber, Name, Price, Unit, PhotoPath) VALUES (?,?, ?, ?, ?, ?)";
 		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(productInsert)) {
 			ps.setInt(1, product.getVendorId());
 			ps.setString(2, product.getPartNumber());
