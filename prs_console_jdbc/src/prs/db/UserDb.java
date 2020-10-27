@@ -103,7 +103,7 @@ public class UserDb {
 
 			ps.executeUpdate();
 
-			return true;
+	2		return true;
 
 		} catch (SQLException e) {
 			System.err.print("caught exception" + e);
@@ -112,10 +112,12 @@ public class UserDb {
 	}
 
 	public User authenticateUser(String userName, String password) {
-		String AuthUserName = "SELECT FROM user WHERE UserName = ?";
-		String AuthPassword = "SELECT FROM user WHERE Password = ?";
-		try (Connection con = getConnection(); PreparedStatement user = con.prepareStatement(AuthUserName)) {
-			try (Connection con2 = getConnection(); PreparedStatement pass = con.prepareStatement(AuthPassword)) {
+		String AuthenticateUser = "SELECT FROM user WHERE UserName = ?";
+		String AuthenticatePassword = "SELECT FROM user WHERE password = ?";
+
+		try (Connection con = getConnection(); PreparedStatement user = con.prepareStatement(Authenticate)) {
+			{
+				ResultSet rs = stmt.executeQuery(Authenticate);
 
 			}
 		}
