@@ -103,7 +103,7 @@ public class UserDb {
 
 			ps.executeUpdate();
 
-	2		return true;
+			return true;
 
 		} catch (SQLException e) {
 			System.err.print("caught exception" + e);
@@ -111,15 +111,15 @@ public class UserDb {
 		}
 	}
 
-	public User authenticateUser(String userName, String password) {
-		String AuthenticateUser = "SELECT FROM user WHERE UserName = ?";
-		String AuthenticatePassword = "SELECT FROM user WHERE password = ?";
-
-		try (Connection con = getConnection(); PreparedStatement user = con.prepareStatement(Authenticate)) {
-			{
-				ResultSet rs = stmt.executeQuery(Authenticate);
-
-			}
-		}
-	}
+//	public User authenticateUser(String userName, String password) {
+//		String Authenticate = "SELECT FROM user WHERE UserName" + userName + " = ? AND Password" + password + "= ?";
+//
+//		try (Connection con = getConnection(); PreparedStatement user = con.prepareStatement(Authenticate)) {
+//			{
+//				ResultSet rs = stmt.executeQuery(Authenticate);
+//					rs.getString(userName);
+//					rs.get
+//			}
+//		}
+//	}
 }
