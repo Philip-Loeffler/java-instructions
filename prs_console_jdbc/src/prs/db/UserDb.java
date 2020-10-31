@@ -111,15 +111,36 @@ public class UserDb {
 		}
 	}
 
-//	public User authenticateUser(String userName, String password) {
-//		String Authenticate = "SELECT FROM user WHERE UserName" + userName + " = ? AND Password" + password + "= ?";
-//
-//		try (Connection con = getConnection(); PreparedStatement user = con.prepareStatement(Authenticate)) {
-//			{
-//				ResultSet rs = stmt.executeQuery(Authenticate);
-//					rs.getString(userName);
-//					rs.get
-//			}
-//		}
-//	}
+	public User authenticateUser(String userName, String password) {
+		String authenticate = "SELECT * FROM user WHERE UserName = ? AND Password = ?";
+		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(authenticate);) {
+			ps.setString(1, userName);
+			ps.setString(2, password);
+//since this is a select we use execute query to get back a result set
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				int id = rs.getInt("ID");
+				String userNameFromDb = rs.getString("UserName");
+				String passwordFromDb = rs.getString("password");
+				String firstName = rs.getString("FirstName");
+				String lastName = rs.getString("LastName");
+				int phoneNumber = rs.getInt("PhoneNumber");
+				String email = rs.getString("email");
+				boolean isReviewer = rs.getBoolean("isReviewer");
+				boolean isAdmin = rs.getBoolean("isAdmin");
+				User user = new User(id, userNameFromDb, passwordFromDb, firstName, lastName, phoneNumber, email,
+						isReviewer, isAdmin);
+
+				return user;
+			} else {
+				return null;
+			}
+
+		} catch (SQLException e) {
+			System.err.print("caught exception" + e);
+		}
+
+		return null;
+	}
+
 }

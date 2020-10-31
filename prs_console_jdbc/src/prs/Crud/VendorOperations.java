@@ -1,9 +1,6 @@
 package prs.Crud;
 
-import java.util.List;
-
 import prs.business.Product;
-import prs.business.Vendor;
 import prs.db.ProductDb;
 import prs.db.VendorDb;
 import prs.ui.Console;
@@ -12,15 +9,15 @@ public class VendorOperations {
 
 	VendorDb vendor = new VendorDb();
 
-	public static void listVendor() {
-		VendorDb vendorDb = new VendorDb();
-		List<Vendor> vendors = VendorDb.getAll();
-		System.out.println("Products:");
-		for (Vendor vendor : vendors) {
-			System.out.println(vendor);
-		}
-		System.out.println();
-	}
+//	public static void listVendor() {
+//		VendorDb vendorDb = new VendorDb();
+//		List<Vendor> vendors = VendorDb.getAll();
+//		System.out.println("Products:");
+//		for (Vendor vendor : vendors) {
+//			System.out.println(vendor);
+//		}
+//		System.out.println();
+//	}
 
 	public static void deleteProduct() {
 		ProductDb product = new ProductDb();
