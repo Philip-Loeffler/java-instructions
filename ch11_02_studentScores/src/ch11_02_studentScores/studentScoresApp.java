@@ -20,24 +20,17 @@ public class studentScoresApp {
 		for (int i = 0; i < arrayOfStudents.length; i++) {
 			System.out.println("set students firs name");
 			String studentFirstName = sc.nextLine();
-			arrayOfStudents[i] = student;
-			student.setFirstName(studentFirstName);
 
 			System.out.println("set students last Name");
 			String studentLastName = sc.nextLine();
-			arrayOfStudents[i] = student;
-			student.setLastName(studentLastName);
 
 			System.out.println("set students score");
 			int studentScore = sc.nextInt();
-			arrayOfStudents[i] = student;
-			student.setScore(studentScore);
 
 			arrayOfStudents[i] = new Student(studentFirstName, studentLastName, studentScore);
-
+			System.out.println(arrayOfStudents[i].getFirstName() + arrayOfStudents[i].getLastName()
+					+ arrayOfStudents[i].getScore());
 		}
-
-		System.out.println(student.getFirstName() + student.getLastName() + student.getScore());
 
 	}
 
